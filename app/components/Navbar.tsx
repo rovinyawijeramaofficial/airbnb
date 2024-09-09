@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DesktopLogo from "../../public/airbnb-desktop.png";
 import MobileLogo from "../../public/airbnb-mobile.webp";
+import { UserNav } from "./UserNav";
 
 export function Navbar() {
   return (
@@ -13,15 +14,18 @@ export function Navbar() {
             alt="Desktop Logo"
             className="w-32 hidden lg:block"
           />
+
           <Image
             src={MobileLogo}
             alt="Mobile Logo"
             className="block lg:hidden w-12"
           />
         </Link>
-        <div className="rounded-full border px-5 py-2">
+        <div className="rounded-full border-px-5 py-2">
         <h1>Hello From the Search</h1>
         </div>
+
+        <UserNav />
       </div>
     </nav>
   );
