@@ -91,7 +91,8 @@ async function ShowItems({
     <>
       {data.length === 0 ? (
         <NoItems
-          
+          description="Please check a other category or create your own listing!"
+          title="Sorry no listings found for this category..."
         />
       ) : (
         <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
@@ -103,7 +104,10 @@ async function ShowItems({
               location={item.country as string}
               price={item.price as number}
               userId={user?.id}
-             
+              favoriteId={item.Favorite[0]?.id}
+              isInFavoriteList={item.Favorite.length > 0 ? true : false}
+              homeId={item.id} 
+              pathName="/"             
             />
           ))}
         </div>
