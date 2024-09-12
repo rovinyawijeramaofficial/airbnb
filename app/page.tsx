@@ -1,5 +1,8 @@
 import { Suspense, use } from "react";
+import ReactCountryFlag from "react-country-flag";
 
+// In your component
+<ReactCountryFlag countryCode="US" svg style={{ width: '2em', height: '2em' }} />
 import { MapFilterItems } from "./components/MapFilterItems";
 import prisma from "./lib/db";
 import { SkeltonCard } from "./components/SkeletonCard";
