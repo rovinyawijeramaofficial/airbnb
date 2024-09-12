@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
+
+// next.config.js
+
+
 const nextConfig = {
     images: {
+      domains: ['lh3.googleusercontent.com'], // Add the external domain here
       remotePatterns: [
         {
           hostname: "a0.muscache.com",
