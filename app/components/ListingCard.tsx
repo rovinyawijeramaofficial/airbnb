@@ -1,46 +1,44 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useCountries } from "../lib/getCountries";
 import { AddToFavoriteButton, DeleteFromFavoriteButton } from "./SubmitButtons";
 import { DeleteFromFavorite, addToFavorite } from "../actions";
+import { CountryFlag } from "./CountryFlag"; // Import the reusable component
 
 interface iAppProps {
-    imagePath: string;
-    description: string;
-    location: string;
-    price: number;
-    userId: string | undefined;
-    isInFavoriteList: boolean;
-    favoriteId: string;
-    homeId: string;
-    pathName: string;
-  }
+  imagePath: string;
+  description: string;
+  location: string; // Country code, e.g., 'US'
+  price: number;
+  userId: string | undefined;
+  isInFavoriteList: boolean;
+  favoriteId: string;
+  homeId: string;
+  pathName: string;
+}
 
-  export function ListingCard({
+export function ListingCard({
   description,
   imagePath,
   location,
   price,
   userId,
-  favoriteId, 
+  favoriteId,
   isInFavoriteList,
   homeId,
   pathName,
-  }: iAppProps) {
-    const { getCountryByValue } = useCountries();
-    const country = getCountryByValue(location);
-  
-    
-    return (
-        <div className="flex flex-col">
-        <div className="relative h-72">
-          <Image
-            src={`https://hxwsvfhgsutyckbbvvww.supabase.co/storage/v1/object/public/images/${imagePath}`}
-            alt="Image of House"
-            fill
-            className="rounded-lg h-full object-cover" />
+}: iAppProps) {
 
-          {userId && (
+  return (
+    <div className="flex flex-col">
+      <div className="relative h-72">
+        <Image
+          src={`https://hxwsvfhgsutyckbbvvww.supabase.co/storage/v1/object/public/images/${imagePath}`}
+          alt="Image of House"
+          fill
+          className="rounded-lg h-full object-cover"
+        />
+
+        {userId && (
           <div className="z-10 absolute top-2 right-2">
             {isInFavoriteList ? (
               <form action={DeleteFromFavorite}>
@@ -56,14 +54,14 @@ interface iAppProps {
                 <input type="hidden" name="pathName" value={pathName} />
                 <AddToFavoriteButton />
               </form>
-              )}
-              </div>
             )}
           </div>
-               
-          <Link href={`/Home/${homeId}`} className="mt-2">
-        <h3 className="font-medium text-base">
-          {country?.flag} {country?.label} / {country?.region}
+        )}
+      </div>
+
+      <Link href={`/Home/${homeId}`} className="mt-2">
+        <h3 className="font-medium text-base flex items-center">
+          <CountryFlag location={location} /> {/* Reuse the component here */}
         </h3>
         <p className="text-muted-foreground text-sm line-clamp-2">
           {description}
@@ -72,8 +70,6 @@ interface iAppProps {
           <span className="font-medium text-black">${price}</span> Night
         </p>
       </Link>
-
-          </div>
-  
-    );
+    </div>
+  );
 }
